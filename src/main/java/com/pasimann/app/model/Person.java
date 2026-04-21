@@ -11,6 +11,8 @@ public class Person {
 
     private String firstName;
     private String lastName;
+    
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Person(

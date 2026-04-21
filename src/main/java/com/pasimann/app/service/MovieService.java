@@ -10,18 +10,26 @@ import com.pasimann.app.api.MovieItem;
 @Service
 public class MovieService {
 
-    public MovieService(MovieRepository movieRepository, PersonRepository personRepository) {
-        this.movieRepository = movieRepository;
-        this.personRepository = personRepository;
+   MovieRepository movieRepository; 
+   PersonRepository personRepository; 
+   DataItemMapper dataItemMapper;
+
+    public MovieService(MovieRepository movieRepository, PersonRepository personRepository, 
+           DataItemMapper dataItemMapper) {
+         this.movieRepository = movieRepository;
+         this.personRepository = personRepository;
+         this.dataItemMapper = dataItemMapper;
     }
 
     public List<MovieItem> getAllMovies() {
-      // TODO map all the fields 
-      List<Movie> movies = movieRepository.getAllMovies(); 
-      for (Movie movie : movies) {
-          List<Person> persons = personRepository.getAllPersonsByMovieId(movie.getId());
-      }
+      List<MovieItem> results = new ArrayList<>();
+      List<Movie> movies = movieRepository.getAllMovies();
 
+      for (Movie movie : movies) {
+          List<Person> personel = personRepository.getAllPersonsByMovieId(movie.getId());
+          results.add(dataItemMapper.mapToMovieItem(movie, personel));
+      }
+      return results;
     }
 
     public MovieItem saveItem(MovieItem item) {
