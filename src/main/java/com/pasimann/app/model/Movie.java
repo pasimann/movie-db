@@ -27,7 +27,7 @@ public class Movie {
     private Set<Person> persons;
 
     public Movie(String name, int year, int ageLimit, int rating, String synopsis, 
-                  List<String> genres, List<Person> persons) {
+                  List<String> genres, Set<Person> persons) {
         this.name = name;
         this.year = year;
         this.ageLimit = ageLimit;
@@ -45,5 +45,5 @@ public class Movie {
     public int getRating() { return rating; }
     public String getSynopsis() { return synopsis; }
     public List<String> getGenres() { return genres; }
-    public List<Person> getPersons() { return persons; }
+    public Set<Person> getPersons() { return persons; }
   }

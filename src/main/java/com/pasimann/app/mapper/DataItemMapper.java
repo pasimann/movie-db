@@ -26,4 +26,11 @@ public class DataItemMapper {
         }
         return results;
     }
+
+    public Movie mapToMovie(MovieItem movieItem, List<Person> personel) {
+        Movie result = new Movie(movieItem.name(), movieItem.year(), movieItem.ageLimit(), 
+            movieItem.rating(), movieItem.synopsis(), movieItem.genres(), 
+            new HashSet<>(personel));
+        return result;
+    }
 }

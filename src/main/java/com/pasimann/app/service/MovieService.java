@@ -31,48 +31,50 @@ public class MovieService {
       return results;
     }
 
-    public MovieItem saveItem(MovieItem movieItem) {
+    public MovieItem saveNewMovie(MovieItem movieItem) {
         // TODO FIX ME: map all the fields 
         // Persons (actor, director) could be persisted 
         // as a new person only if not already in the db 
         // So we can check the person repo for the given name and role
         // to check if we need add a new person row or use existing one
 
-        Person movieDirector; 
 
-        Optional<Person> director = personRepository.
+        List<Person> personel = new ArrayList<>(); 
+
+        Optional<Person> dbDirector = personRepository
             .findByFirstNameAndLastNameAndRole(
                 movieItem.getDirector().getFirstName(),
                 movieItem.getDirector().getLastName(), 
                 "DIRECTOR"); 
         
-       if (director.isPresent()) {
-         movieDirector = director.get(); 
+       if (dbDirector.isPresent()) {
+         personel.add(dbDirector.get()); 
        } else {
-         movieDirector = new Person(movieItem.getDirector().getFirstName(),
+         personel.add(new Person(movieItem.getDirector().getFirstName(),
                 movieItem.getDirector().getLastName(), 
                 "DIRECTOR"); 
        }
 
-       List<Person> movieActors = new ArrayList<>(); 
-
-       for (PersonItem item : movieItem.getActors()) {
-         Optional<Person> actor = personRepository.
+       for (PersonItem actor : movieItem.getActors()) {
+         Optional<Person> dbActor = personRepository
             .findByFirstNameAndLastNameAndRole(
-                movieItem.getDirector().getFirstName(),
-                movieItem.getDirector().getLastName(), 
+                actor.getFirstName(),
+                actor.getLastName(), 
                 "ACTOR"); 
         
-         if (actor.isPresent()) {
-           movieActors.add(actor.get()); 
+         if (dbActor.isPresent()) {
+           personel.add(dbActor.get()); 
          } else {
-           movieActors.add(new Person(movieItem.getDirector().getFirstName(),
-                 movieItem.getDirector().getLastName(), 
+           personel.add(new Person(actor.getFirstName(),
+                 actor.getLastName(), 
                  "ACTOR")); 
          }
        }
 
        // TODO add Movie to db with mapped fields; Director and Actors 
        // might be new ones or existing rows. 
+       
+       Movie movie = dataItemMapper.mapToMovie(movieItem, personel);
+       return dataItemMapper.mapToMovieItem(movieRepository.save(movie));
     }
 }
