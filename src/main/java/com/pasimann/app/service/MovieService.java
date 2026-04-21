@@ -26,8 +26,7 @@ public class MovieService {
       List<Movie> movies = movieRepository.getAllMovies();
 
       for (Movie movie : movies) {
-          List<Person> personel = personRepository.getAllPersonsByMovieId(movie.getId());
-          results.add(dataItemMapper.mapToMovieItem(movie, personel));
+          results.add(dataItemMapper.mapToMovieItem(movie));
       }
       return results;
     }

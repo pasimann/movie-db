@@ -18,26 +18,23 @@ public class Movie {
     @ElementCollection
     private List<String> genres;
 
-    @OneToMany
-    @JoinColumn(name = "movie_id")
-    private List<Person> actors;
-
-    // One director for each movie in this model
-    // We could have different actor and director tables, 
-    // but then the actor star might want to direct the movie...
-    @JoinColumn(name = "movie_id")
-    private Person director;
+    @ManyToMany
+    @JoinTable(
+        name = "movie_person",
+        joinColumns = @JoinColumn(name = "movie_id"),
+        inverseJoinColumns = @JoinColumn(name = "person_id")
+    )
+    private Set<Person> persons;
 
     public Movie(String name, int year, int ageLimit, int rating, String synopsis, 
-                  List<String> genres, List<Person> actors, Person director) {
+                  List<String> genres, List<Person> persons) {
         this.name = name;
         this.year = year;
         this.ageLimit = ageLimit;
         this.rating = rating;
         this.synopsis = synopsis;
         this.genres = genres;
-        this.actors = actors;
-        this.director = director;
+        this.persons = persons;
     }
 
     public Long getId() { return id; }
@@ -48,6 +45,5 @@ public class Movie {
     public int getRating() { return rating; }
     public String getSynopsis() { return synopsis; }
     public List<String> getGenres() { return genres; }
-    public List<Person> getActors() { return actors; }
-    public Person getDirector() { return director; }
+    public List<Person> getPersons() { return persons; }
   }

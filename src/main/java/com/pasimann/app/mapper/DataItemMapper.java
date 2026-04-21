@@ -2,8 +2,8 @@ package com.pasimann.app.mapper;
 
 public class DataItemMapper {
 
-    public MovieItem mapToMovieItem(Movie movie, List<Person> moviePersonel) {
-       List<PersonItem> personItems = mapToPersonItems(moviePersonel);
+    public MovieItem mapToMovieItem(Movie movie) {
+       List<PersonItem> personItems = mapToPersonItems(movie.getPersons());
 
         PersonItem director = personItems.stream().filter(
             p -> p.role().toUpperCase().equals(Role.DIRECTOR.name())).findFirst()
