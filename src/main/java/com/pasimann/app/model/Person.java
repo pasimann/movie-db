@@ -1,19 +1,24 @@
 package com.pasimann.app.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+
+import java.util.Set;
 
 @Entity
+@Table(name = "person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
     
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @ManyToMany(mappedBy = "persons")
+    Set<Movie> movies;
 
     public Person(
         String firstName,
@@ -31,4 +36,7 @@ public class Person {
     public String getLastName() { return lastName; }
     public Role getRole() { return role; }
 
+    public Set<Movie> getMovies() {
+        return movies;
+    }
 }

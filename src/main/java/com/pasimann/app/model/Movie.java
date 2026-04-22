@@ -1,19 +1,23 @@
 package com.pasimann.app.model;
 
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "movie")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private int year;
-    private int ageLimit;
-    private int rating;
-    private String synopsis;
+    private final String name;
+    private final int year;
+    private final int ageLimit;
+    private final int rating;
+    private final String synopsis;
 
     @ElementCollection
     private List<String> genres;
@@ -26,15 +30,15 @@ public class Movie {
     )
     private Set<Person> persons;
 
-    public Movie(String name, int year, int ageLimit, int rating, String synopsis, 
-                  List<String> genres, Set<Person> persons) {
+    public Movie(String name, int year, int ageLimit, int rating, String synopsis,
+                    List<String> genres, List<Person> persons) {
         this.name = name;
         this.year = year;
         this.ageLimit = ageLimit;
         this.rating = rating;
         this.synopsis = synopsis;
         this.genres = genres;
-        this.persons = persons;
+        this.persons = new HashSet<>(persons);
     }
 
     public Long getId() { return id; }
