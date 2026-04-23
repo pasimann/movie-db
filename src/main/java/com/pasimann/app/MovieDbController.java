@@ -42,5 +42,8 @@ public class MovieDbController {
         return service.findMoviesByRole(request, Role.DIRECTOR);
     }
 
-    // TODO save new Movie method
+    @RequestMapping(value={"/add-new-movie"}, method=RequestMethod.POST)
+    public @ResponseBody MovieData addNewMovie(@RequestBody MovieData data) {
+        return service.addNewMovie(data);
+    }
 }

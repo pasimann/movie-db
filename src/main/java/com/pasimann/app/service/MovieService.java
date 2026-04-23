@@ -72,7 +72,7 @@ public class MovieService {
       return results;
     }
 
-    public MovieData saveNewMovie(MovieData movieData) {
+    public MovieData addNewMovie(MovieData movieData) {
         // Persons (actor, director) persisted to the db
         // as a new person only if not already in the db
 

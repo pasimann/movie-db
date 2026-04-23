@@ -18,8 +18,10 @@ public class Movie {
     private final int ageLimit;
     private final int rating;
     private final String synopsis;
-
+    
     @ElementCollection
+    @Column(name="genres", nullable=false)
+    @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
     private List<String> genres;
 
     @ManyToMany

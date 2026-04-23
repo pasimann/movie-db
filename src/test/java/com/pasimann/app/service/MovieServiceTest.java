@@ -112,7 +112,7 @@ public class MovieServiceTest {
         when(movieRepository.save(movie)).thenReturn(movie);
         when(dataMapper.mapToMovieData(movie)).thenReturn(movieData);
 
-        MovieData result = movieService.saveNewMovie(movieData);
+        MovieData result = movieService.addNewMovie(movieData);
 
         assertEquals("Test Movie", result.getName());
     }
@@ -139,7 +139,7 @@ public class MovieServiceTest {
         when(movieRepository.save(movie)).thenReturn(movie);
         when(dataMapper.mapToMovieData(movie)).thenReturn(movieData);
 
-        MovieData result = movieService.saveNewMovie(movieData);
+        MovieData result = movieService.addNewMovie(movieData);
 
         assertEquals("Test Movie", result.getName());
     }
