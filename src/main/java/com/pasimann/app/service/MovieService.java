@@ -29,7 +29,7 @@ public class MovieService {
     public List<MovieData> findMoviesByRole(SearchRequest request, Role role) {
         List<MovieData> results = new ArrayList<>();
         Optional<Person> person = personRepository.findByFirstNameAndLastNameAndRole(
-                request.getFirstName(), request.getLastName(), role.name());
+                request.getFirstName(), request.getLastName(), role);
         if (person.isPresent()) {
             List<Movie> movies = person.get().getMovies().stream().toList();
             for (Movie movie : movies) {
@@ -82,7 +82,7 @@ public class MovieService {
             .findByFirstNameAndLastNameAndRole(
                 movieData.getDirector().getFirstName(),
                 movieData.getDirector().getLastName(),
-                "DIRECTOR"); 
+                Role.DIRECTOR); 
         
        if (dbDirector.isPresent()) {
          personnel.add(dbDirector.get());
@@ -97,7 +97,7 @@ public class MovieService {
             .findByFirstNameAndLastNameAndRole(
                 actor.getFirstName(),
                 actor.getLastName(), 
-                "ACTOR"); 
+                Role.ACTOR); 
         
          if (dbActor.isPresent()) {
            personnel.add(dbActor.get());

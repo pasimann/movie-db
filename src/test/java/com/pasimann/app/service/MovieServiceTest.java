@@ -102,8 +102,8 @@ public class MovieServiceTest {
         List<PersonData> actors = new ArrayList<>();
         actors.add(actor);
         MovieData movieData = new MovieData(1L, "Test Movie", 2010, new ArrayList<>(), 18, 3, actors, director, "A movie about testing");
-        when(personRepository.findByFirstNameAndLastNameAndRole("John", "Doe", "DIRECTOR")).thenReturn(Optional.empty());
-        when(personRepository.findByFirstNameAndLastNameAndRole("Jane", "Doe", "ACTOR")).thenReturn(Optional.empty());
+        when(personRepository.findByFirstNameAndLastNameAndRole("John", "Doe", Role.DIRECTOR)).thenReturn(Optional.empty());
+        when(personRepository.findByFirstNameAndLastNameAndRole("Jane", "Doe", Role.ACTOR)).thenReturn(Optional.empty());
 
         Movie movie = new Movie("Movie", 2010, 15, 4,
                 "Very exiting movie.", List.of("Action", "Drama"), new ArrayList<>());
@@ -129,8 +129,8 @@ public class MovieServiceTest {
         Person director = new Person("John", "Doe", Role.DIRECTOR);
         Person actor = new Person("Jane", "Doe", Role.ACTOR);
 
-        when(personRepository.findByFirstNameAndLastNameAndRole("John", "Doe", "DIRECTOR")).thenReturn(Optional.of(director));
-        when(personRepository.findByFirstNameAndLastNameAndRole("Jane", "Doe", "ACTOR")).thenReturn(Optional.of(actor));
+        when(personRepository.findByFirstNameAndLastNameAndRole("John", "Doe", Role.DIRECTOR)).thenReturn(Optional.of(director));
+        when(personRepository.findByFirstNameAndLastNameAndRole("Jane", "Doe", Role.ACTOR)).thenReturn(Optional.of(actor));
 
         Movie movie = new Movie("Movie", 2010, 15, 4,
                 "Very exiting movie.", List.of("Action", "Drama"), new ArrayList<>());

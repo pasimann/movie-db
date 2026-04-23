@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
     public Optional<Person> findByFirstNameAndLastNameAndRole(
-        String firstName, String lastName, String role);
+        String firstName, String lastName, Role role);
 }
