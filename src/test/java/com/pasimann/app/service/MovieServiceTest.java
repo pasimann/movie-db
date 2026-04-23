@@ -53,7 +53,7 @@ public class MovieServiceTest {
         Movie movie = new Movie("Movie", 2010, 15, 4,
                 "Very exiting movie.", List.of("Action", "Drama"), new ArrayList<>());
 
-        when(movieRepository.getAllMovies()).thenReturn(List.of(movie));
+        when(movieRepository.findAll()).thenReturn(List.of(movie));
         when(dataMapper.mapToMovieData(any(Movie.class))).thenReturn(movieData);
 
         List<MovieData> result = movieService.findMoviesByPerson(request);
@@ -73,7 +73,7 @@ public class MovieServiceTest {
         Movie movie = new Movie("Movie", 2010, 15, 4,
                 "Very exiting movie.", List.of("Action", "Drama"), new ArrayList<>());
 
-        when(movieRepository.getAllMovies()).thenReturn(List.of(movie));
+        when(movieRepository.findAll()).thenReturn(List.of(movie));
         when(dataMapper.mapToMovieData(any(Movie.class))).thenReturn(movieData);
 
         List<MovieData> result = movieService.findMoviesByPerson(request);
@@ -87,7 +87,7 @@ public class MovieServiceTest {
         List<Movie> movies = new ArrayList<>();
         movies.add(new Movie("Movie", 2010, 15, 4,
                 "Very exiting movie.", List.of("Action", "Drama"), new ArrayList<>()));
-        when(movieRepository.getAllMovies()).thenReturn(movies);
+        when(movieRepository.findAll()).thenReturn(movies);
         when(dataMapper.mapToMovieData(any(Movie.class))).thenReturn(new MovieData());
 
         List<MovieData> result = movieService.getAllMovies();

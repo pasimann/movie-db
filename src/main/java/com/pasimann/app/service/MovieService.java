@@ -64,7 +64,7 @@ public class MovieService {
 
     public List<MovieData> getAllMovies() {
       List<MovieData> results = new ArrayList<>();
-      List<Movie> movies = movieRepository.getAllMovies();
+      List<Movie> movies = movieRepository.findAll();
 
       for (Movie movie : movies) {
           results.add(dataMapper.mapToMovieData(movie));

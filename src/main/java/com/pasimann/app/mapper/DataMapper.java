@@ -5,11 +5,13 @@ import com.pasimann.app.api.PersonData;
 import com.pasimann.app.model.Movie;
 import com.pasimann.app.model.Person;
 import com.pasimann.app.model.Role;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class DataMapper {
 
     public MovieData mapToMovieData(Movie movie) {
@@ -23,7 +25,7 @@ public class DataMapper {
             p -> p.getRole().toUpperCase().equals(Role.ACTOR.name())).collect(Collectors.toList());
 
         return new MovieData(movie.getId(),
-                movie.getName(), movie.getYear(), movie.getGenres(), movie.getAgeLimit(),
+                movie.getName(), movie.getReleaseYear(), movie.getGenres(), movie.getAgeLimit(),
                 movie.getRating(), actors, director, movie.getSynopsis());
     }
 

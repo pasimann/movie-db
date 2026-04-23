@@ -3,7 +3,7 @@ package com.pasimann.app.api;
 import java.util.List;
 
 public class MovieData {
-    long id;
+    Long id;
     String name;
     int year;
     List<String> genres;
@@ -15,7 +15,7 @@ public class MovieData {
 
     public MovieData() {}
 
-    public MovieData(long id, String name, int year, List<String> genres, int ageLimit, int rating, List<PersonData> actors, PersonData director, String synopsis) {
+    public MovieData(Long id, String name, int year, List<String> genres, int ageLimit, int rating, List<PersonData> actors, PersonData director, String synopsis) {
         this.id = id;
         this.name = name;
         this.year = year;

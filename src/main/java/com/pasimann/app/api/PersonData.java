@@ -2,14 +2,14 @@ package com.pasimann.app.api;
 
 public class PersonData {
 
-    long id;
+    Long id;
     String firstName;
     String lastName;
     String role;
 
     public PersonData() {}
 
-    public PersonData(long id, String firstName, String lastName, String role) {
+    public PersonData(Long id, String firstName, String lastName, String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

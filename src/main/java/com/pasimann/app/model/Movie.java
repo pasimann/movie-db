@@ -14,7 +14,7 @@ public class Movie {
     private Long id;
 
     private final String name;
-    private final int year;
+    private final int releaseYear;
     private final int ageLimit;
     private final int rating;
     private final String synopsis;
@@ -32,10 +32,10 @@ public class Movie {
     )
     private Set<Person> persons;
 
-    public Movie(String name, int year, int ageLimit, int rating, String synopsis,
-                    List<String> genres, List<Person> persons) {
+    public Movie(String name, int releaseYear, int ageLimit, int rating, String synopsis,
+                 List<String> genres, List<Person> persons) {
         this.name = name;
-        this.year = year;
+        this.releaseYear = releaseYear;
         this.ageLimit = ageLimit;
         this.rating = rating;
         this.synopsis = synopsis;
@@ -46,7 +46,7 @@ public class Movie {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
-    public int getYear() { return year; }
+    public int getReleaseYear() { return releaseYear; }
     public int getAgeLimit() { return ageLimit; }
     public int getRating() { return rating; }
     public String getSynopsis() { return synopsis; }
