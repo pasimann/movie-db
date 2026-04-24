@@ -6,16 +6,13 @@ import com.pasimann.app.api.SearchRequest;
 import com.pasimann.app.model.Role;
 import com.pasimann.app.validator.MovieDataValidator;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.pasimann.app.api.MovieData;
 import com.pasimann.app.service.MovieService;
 
 @RequestMapping(path = "/movie-db/api")
-@Controller
+@RestController
 public class MovieDbController {
 
     MovieService service;

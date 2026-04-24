@@ -74,10 +74,13 @@ public class MovieServiceTest {
         List<PersonData> actors = List.of(actor);
         MovieData movieData = new MovieData(1L, "Test Movie", 2010, new ArrayList<>(), 18, 3, actors, director, "A movie about testing");
 
+        Person ps = new Person("John", "Doe", Role.DIRECTOR);
         Movie movie = new Movie("Movie", 2010, 15, 4,
-                "Very exiting movie.", List.of("Action", "Drama"), new ArrayList<>());
+                "Very exiting movie.", List.of("Action", "Drama"), List.of(ps));
+        ps.getMovies().add(movie);
 
-        when(movieRepository.findAll()).thenReturn(List.of(movie));
+        when(personRepository.findByFirstNameAndLastName(any(String.class), any(String.class)))
+                .thenReturn(Optional.of(ps));
         when(dataMapper.mapToMovieData(any(Movie.class))).thenReturn(movieData);
 
         List<MovieData> result = movieService.findMoviesByPerson(request);

@@ -15,9 +15,9 @@ import com.pasimann.app.api.MovieData;
 @Service
 public class MovieService {
 
-   MovieRepository movieRepository; 
-   PersonRepository personRepository; 
-   DataMapper dataMapper;
+   private final MovieRepository movieRepository;
+   private final PersonRepository personRepository;
+   private final DataMapper dataMapper;
 
     public MovieService(MovieRepository movieRepository, PersonRepository personRepository,
                         DataMapper dataMapper) {
@@ -51,17 +51,7 @@ public class MovieService {
         }
         return result;
     }
-
-    private Boolean isActorInTheMovie(SearchRequest request, MovieData movieData) {
-        for (PersonData person : movieData.getActors()) {
-            if (person.getFirstName().equals(request.getFirstName())
-                    && person.getLastName().equals(request.getLastName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
     public List<MovieData> getAllMovies() {
       List<MovieData> results = new ArrayList<>();
       List<Movie> movies = movieRepository.findAll();

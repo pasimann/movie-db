@@ -2,6 +2,7 @@ package com.pasimann.app.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class Person {
     private Role role;
 
     @ManyToMany(mappedBy = "persons")
-    Set<Movie> movies;
+    Set<Movie> movies = new HashSet<>();
 
     public Person(
         String firstName,
@@ -28,6 +29,7 @@ public class Person {
         this.lastName = lastName;
         this.role = role;
     }
+
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

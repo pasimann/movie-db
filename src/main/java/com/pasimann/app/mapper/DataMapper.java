@@ -18,9 +18,8 @@ public class DataMapper {
        List<PersonData> personData = mapToPersonData(movie.getPersons().stream().toList());
 
         PersonData director = personData.stream().filter(
-            p -> p.getRole().toUpperCase().equals(Role.DIRECTOR.name())).findFirst()
-            .orElseThrow(() -> new RuntimeException("Director not found"));
-
+            p -> p.getRole().toUpperCase().equals(Role.DIRECTOR.name())).findFirst().get();
+        
         List<PersonData> actors = personData.stream().filter(
             p -> p.getRole().toUpperCase().equals(Role.ACTOR.name())).collect(Collectors.toList());
 
