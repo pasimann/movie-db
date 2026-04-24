@@ -50,7 +50,7 @@ class MovieDbControllerTest {
 
     @Test
     void getAllMovies_success() throws Exception {
-        mockMvc.perform(get("/get-all-movies"))
+        mockMvc.perform(get("/movie-db/api/get-all-movies"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Interstellar"));
     }
@@ -76,7 +76,7 @@ class MovieDbControllerTest {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = ow.writeValueAsString(movieData);
 
-        mockMvc.perform(post("/add-new-movie")
+        mockMvc.perform(post("/movie-db/api/add-new-movie")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isOk())

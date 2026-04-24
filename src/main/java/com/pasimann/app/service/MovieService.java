@@ -41,12 +41,12 @@ public class MovieService {
 
     public List<MovieData> findMoviesByPerson(SearchRequest request) {
         List<MovieData> result = new ArrayList<>();
-        // TODO you could query Person's name (any role) from the DB and access its movies list
-        for (MovieData movie : getAllMovies()) {
-            if ((movie.getDirector().getFirstName().equals(request.getFirstName())
-                  && movie.getDirector().getLastName().equals(request.getLastName()))
-               || isActorInTheMovie(request, movie)) {
-                result.add(movie);
+        Optional<Person> person = personRepository.findByFirstNameAndLastName(request.getFirstName(), request.getLastName());
+
+        if (person.isPresent()) {
+            List<Movie> movies = person.get().getMovies().stream().toList();
+            for (Movie m : movies) {
+                result.add(dataMapper.mapToMovieData(m));
             }
         }
         return result;
