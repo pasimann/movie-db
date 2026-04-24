@@ -11,6 +11,7 @@ import com.pasimann.app.model.*;
 import org.springframework.stereotype.Service;
 
 import com.pasimann.app.api.MovieData;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MovieService {
@@ -26,6 +27,7 @@ public class MovieService {
          this.dataMapper = dataMapper;
     }
 
+    @Transactional(readOnly = true)
     public List<MovieData> findMoviesByRole(SearchRequest request, Role role) {
         List<MovieData> results = new ArrayList<>();
         Optional<Person> person = personRepository.findByFirstNameAndLastNameAndRole(
@@ -39,6 +41,7 @@ public class MovieService {
         return results;
     }
 
+    @Transactional(readOnly = true)
     public List<MovieData> findMoviesByPerson(SearchRequest request) {
         List<MovieData> result = new ArrayList<>();
         Optional<Person> person = personRepository.findByFirstNameAndLastName(request.getFirstName(), request.getLastName());
@@ -51,7 +54,8 @@ public class MovieService {
         }
         return result;
     }
-    
+
+    @Transactional(readOnly = true)
     public List<MovieData> getAllMovies() {
       List<MovieData> results = new ArrayList<>();
       List<Movie> movies = movieRepository.findAll();
@@ -62,6 +66,7 @@ public class MovieService {
       return results;
     }
 
+    @Transactional
     public MovieData addNewMovie(MovieData movieData) {
         // Persons (actor, director) persisted to the db
         // as a new person only if not already in the db

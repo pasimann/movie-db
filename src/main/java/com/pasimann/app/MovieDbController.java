@@ -23,27 +23,27 @@ public class MovieDbController {
         this.movieDataValidator = movieDataValidator;
     }
 
-    @RequestMapping(value={"/get-all-movies"}, method=RequestMethod.GET)
+    @GetMapping(value={"/get-all"})
     public @ResponseBody List<MovieData> getAllMovies() {
         return service.getAllMovies();
     }
 
-    @RequestMapping(value={"/find-movie-by-person"}, method=RequestMethod.GET)
+    @GetMapping(value={"/find-by-person"})
     public @ResponseBody List<MovieData> findMoviesByPerson(@RequestBody SearchRequest request) {
         return service.findMoviesByPerson(request);
     }
 
-    @RequestMapping(value={"/find-movie-by-actor"}, method=RequestMethod.GET)
+    @GetMapping(value={"/find-by-actor"})
     public @ResponseBody List<MovieData> findMoviesByActor(@RequestBody SearchRequest request) {
         return service.findMoviesByRole(request, Role.ACTOR);
     }
 
-    @RequestMapping(value={"/find-movie-by-director"}, method=RequestMethod.GET)
+    @GetMapping(value={"/find-by-director"})
     public @ResponseBody List<MovieData> findMoviesByDirector(@RequestBody SearchRequest request) {
         return service.findMoviesByRole(request, Role.DIRECTOR);
     }
 
-    @RequestMapping(value={"/add-new-movie"}, method=RequestMethod.POST)
+    @PostMapping(value={"/add-new"})
     public @ResponseBody MovieData addNewMovie(@RequestBody MovieData data) {
         movieDataValidator.validate(data);
         return service.addNewMovie(data);
