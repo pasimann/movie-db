@@ -11,15 +11,16 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private final String firstName;
-    private final String lastName;
+    private String firstName;
+    private String lastName;
     
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @ManyToMany(mappedBy = "persons")
     Set<Movie> movies = new HashSet<>();
+
+    public Person() { }
 
     public Person(
         String firstName,

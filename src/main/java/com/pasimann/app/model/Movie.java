@@ -13,24 +13,26 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private final String name;
-    private final int releaseYear;
-    private final int ageLimit;
-    private final int rating;
-    private final String synopsis;
+    private String name;
+    private int releaseYear;
+    private int ageLimit;
+    private int rating;
+    private String synopsis;
     
     @ElementCollection
     @Column(name="genres", nullable=false)
     @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
     private List<String> genres;
 
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
         name = "movie_person",
         joinColumns = @JoinColumn(name = "movie_id"),
         inverseJoinColumns = @JoinColumn(name = "person_id")
     )
     private Set<Person> persons;
+
+    public Movie() { }
 
     public Movie(String name, int releaseYear, int ageLimit, int rating, String synopsis,
                  List<String> genres, List<Person> persons) {

@@ -1,8 +1,6 @@
 package com.pasimann.app.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.pasimann.app.api.SearchRequest;
 import com.pasimann.app.api.PersonData;
@@ -103,7 +101,16 @@ public class MovieService {
          }
        }
 
-       Movie movie = dataMapper.mapToMovie(movieData, personnel);
-       return dataMapper.mapToMovieData(movieRepository.save(movie));
+       // TODO check logic
+       // M:N relation needs to be set on both sides
+       Movie movie = dataMapper.mapToMovie(movieData, Collections.emptyList());
+       Movie newMovie = movieRepository.save(movie);
+
+       personnel.forEach(p -> {
+           p.getMovies().add(newMovie);
+           personRepository.save(p);
+       });
+       newMovie.getPersons().addAll(personnel);
+       return dataMapper.mapToMovieData(newMovie);
     }
 }
