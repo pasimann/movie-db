@@ -23,7 +23,7 @@ public class DataMapper {
         List<PersonData> actors = personData.stream().filter(
             p -> p.getRole().toUpperCase().equals(Role.ACTOR.name())).collect(Collectors.toList());
 
-        return new MovieData(movie.getId(),
+        return new MovieData(movie.getUuid(),
                 movie.getName(), movie.getReleaseYear(), movie.getGenres(), movie.getAgeLimit(),
                 movie.getRating(), actors, director, movie.getSynopsis());
     }
@@ -31,7 +31,7 @@ public class DataMapper {
     private List<PersonData> mapToPersonData(List<Person> persons) {
         List<PersonData> results = new ArrayList<>();
         for(Person person : persons) {
-            PersonData data = new PersonData(person.getId(),
+            PersonData data = new PersonData(person.getUuid(),
                 person.getFirstName(), person.getLastName(), person.getRole().name());
             results.add(data);
         }

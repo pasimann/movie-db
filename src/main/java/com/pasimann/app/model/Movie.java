@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "movie")
@@ -12,7 +13,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String uuid;
     private String name;
     private int releaseYear;
     private int ageLimit;
@@ -36,6 +37,7 @@ public class Movie {
 
     public Movie(String name, int releaseYear, int ageLimit, int rating, String synopsis,
                  List<String> genres, List<Person> persons) {
+        this.uuid = UUID.randomUUID().toString();
         this.name = name;
         this.releaseYear = releaseYear;
         this.ageLimit = ageLimit;
@@ -47,6 +49,7 @@ public class Movie {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+    public String getUuid() { return uuid; }
     public String getName() { return name; }
     public int getReleaseYear() { return releaseYear; }
     public int getAgeLimit() { return ageLimit; }

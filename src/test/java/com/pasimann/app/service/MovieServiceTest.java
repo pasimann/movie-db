@@ -47,8 +47,8 @@ public class MovieServiceTest {
     @Test
     public void testFindMoviesBy_directorExists_returnsMoviesPerson() {
         SearchRequest request = new SearchRequest("John", "Doe");
-        PersonData director = new PersonData(2L, "John", "Doe", "DIRECTOR");
-        MovieData movieData = new MovieData(1L, "Test Movie", 2010, new ArrayList<>(), 18, 3, new ArrayList<>(), director, "A movie about testing");
+        PersonData director = new PersonData("uuid", "John", "Doe", "DIRECTOR");
+        MovieData movieData = new MovieData("uuid", "Test Movie", 2010, new ArrayList<>(), 18, 3, new ArrayList<>(), director, "A movie about testing");
 
         Person ps = new Person("John", "Doe", Role.DIRECTOR);
         Movie movie = new Movie("Movie", 2010, 15, 4,
@@ -69,10 +69,10 @@ public class MovieServiceTest {
     @Test
     public void testFindMoviesBy_actorExists_returnsMoviesPerson() {
         SearchRequest request = new SearchRequest("Jane", "Doe");
-        PersonData director = new PersonData(2L, "John", "Doe", "DIRECTOR");
-        PersonData actor = new PersonData(3L, "Jane", "Doe", "ACTOR");
+        PersonData director = new PersonData("uuid", "John", "Doe", "DIRECTOR");
+        PersonData actor = new PersonData("uuid", "Jane", "Doe", "ACTOR");
         List<PersonData> actors = List.of(actor);
-        MovieData movieData = new MovieData(1L, "Test Movie", 2010, new ArrayList<>(), 18, 3, actors, director, "A movie about testing");
+        MovieData movieData = new MovieData("uuid", "Test Movie", 2010, new ArrayList<>(), 18, 3, actors, director, "A movie about testing");
 
         Person ps = new Person("John", "Doe", Role.DIRECTOR);
         Movie movie = new Movie("Movie", 2010, 15, 4,
@@ -104,11 +104,11 @@ public class MovieServiceTest {
 
     @Test
     public void testSaveNewMovie_withNewPersons_savesMovieAndPersons() {
-        PersonData director = new PersonData(2L, "John", "Doe", "DIRECTOR");
-        PersonData actor = new PersonData(3L, "Jane", "Doe", "ACTOR");
+        PersonData director = new PersonData("uuid", "John", "Doe", "DIRECTOR");
+        PersonData actor = new PersonData("uuid", "Jane", "Doe", "ACTOR");
         List<PersonData> actors = new ArrayList<>();
         actors.add(actor);
-        MovieData movieData = new MovieData(1L, "Test Movie", 2010, new ArrayList<>(), 18, 3, actors, director, "A movie about testing");
+        MovieData movieData = new MovieData("uuid", "Test Movie", 2010, new ArrayList<>(), 18, 3, actors, director, "A movie about testing");
         when(personRepository.findByFirstNameAndLastNameAndRole("John", "Doe", Role.DIRECTOR)).thenReturn(Optional.empty());
         when(personRepository.findByFirstNameAndLastNameAndRole("Jane", "Doe", Role.ACTOR)).thenReturn(Optional.empty());
 
@@ -126,11 +126,11 @@ public class MovieServiceTest {
 
     @Test
     public void testSaveNewMovie_withExistingPersons_savesMovieWithExistingPersons() {
-        PersonData directorData = new PersonData(2L, "John", "Doe", "DIRECTOR");
-        PersonData actorData = new PersonData(3L, "Jane", "Doe", "ACTOR");
+        PersonData directorData = new PersonData("uuid", "John", "Doe", "DIRECTOR");
+        PersonData actorData = new PersonData("uuid", "Jane", "Doe", "ACTOR");
         List<PersonData> actorsData = new ArrayList<>();
         actorsData.add(actorData);
-        MovieData movieData = new MovieData(1L, "Test Movie", 2010, new ArrayList<>(), 18, 3, actorsData, directorData, "A movie about testing");
+        MovieData movieData = new MovieData("uuid", "Test Movie", 2010, new ArrayList<>(), 18, 3, actorsData, directorData, "A movie about testing");
 
 
         Person director = new Person("John", "Doe", Role.DIRECTOR);

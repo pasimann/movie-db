@@ -1,21 +1,23 @@
 package com.pasimann.app.api;
 
+import java.util.UUID;
+
 public class PersonData {
 
-    Long id;
+    String uuid;
     String firstName;
     String lastName;
     String role;
 
     public PersonData() {}
 
-    public PersonData(Long id, String firstName, String lastName, String role) {
-        this.id = id;
+    public PersonData(String uuid, String firstName, String lastName, String role) {
+        this.uuid = uuid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.uuid = UUID.randomUUID().toString();
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -39,6 +41,10 @@ public class PersonData {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }
 
